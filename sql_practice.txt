@@ -1,0 +1,133 @@
+
+Q-1. Write an 1.SQL query to fetch “FIRST_NAME” from the Worker table using the alias name <WORKER_NAME>.
+Ans - Select FIRST_NAME AS WORKER_NAME from Worker;
+
+Q-2.  Write an SQL query to fetch “FIRST_NAME” from the Worker table in upper case.
+Ans - Select upper(FIRST_NAME) from Worker;
+
+Q-3. Write an SQL query to fetch unique values of DEPARTMENT from the Worker table.
+Ans - Select distinct DEPARTMENT from Worker;
+Note- (DISTINCT keyword in SQL eliminates all duplicate records from the result 
+returned by the SQL query. 
+The DISTINCT keyword is used in combination with the SELECT statement. 
+Only unique records are returned when the DISTINCT 
+keyword is used while fetching records from a table having multiple duplicate records.)
+
+Q-4. Write an SQL query to print the first three characters of  FIRST_NAME from the Worker table._
+Ans - Select substring(FIRST_NAME,1,3) from Worker;
+Note- (
+The SUBSTRING() function extracts a substring starting from a position in an input string
+ with a given length. In the case of the substring,
+ you need an input string and need to mention the starting point and the total length of the string)
+
+Q-5. Write an SQL query to find the position of the alphabet (‘a’) in the first name column ‘Rajat’ from the Worker table.
+Ans - Select INSTR(FIRST_NAME, BINARY'a') from Worker where FIRST_NAME = 'Rajat';  
+Note - The INSTR() function returns the position of the first occurrence of a string in another string. 
+This function performs a case-insensitive search.
+The INSTR does a case-insensitive search.Using the BINARY operator will make INSTR work as the case-sensitive function.
+
+Q-6.  Write an SQL query to print the FIRST_NAME from the Worker table after removing white spaces from the right side.
+Ans - 	Select RTRIM(FIRST_NAME) from Worker;
+Note - This string function truncates the given character or sub-string from the right of the given original string. 
+It also truncates the space from the right of the specified string.
+
+Q-7. Write an SQL query to print the DEPARTMENT from the Worker table after removing white spaces from the left side.
+Ans - Select LTRIM(DEPARTMENT) from Worker;
+Note - This string function truncates the given character or sub-string from the  of tefthe given original string. 
+It also truncates the space from the left of the specified string.
+
+Q-8. Write an SQL query that fetches the unique values of DEPARTMENT from the Worker table and prints its length.
+Ans - Select Distinct length(DEPARTMENT) FROM WORKER;
+
+Q-9. Write an SQL query to print the FIRST_NAME from the Worker table after replacing ‘a’ with ‘A’.
+Ans - Select REPLACE(FIRST_NAME,'a','A') from Worker;
+
+Q-10. Write an SQL query to print the FIRST_NAME and LAST_NAME from the Worker table
+ into a single column COMPLETE_NAME. A space char should separate them.
+Ans - Select CONCAT (First_Name, ' ', Last_Name) As 'Complete_Name' from worker;
+Note - The SQL CONCAT function joins two or more strings together to form a single string.
+
+Q-11. Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending.
+Ans - Select * from worker order by First_Name Asc;
+
+Q-12. Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending and DEPARTMENT Descending.
+Ans - Select * from worker order by First_Name Asc, Department desc;
+
+Q-13. Write an SQL query to print details for Workers with the first names “Rajat” and “Falgun” from the Worker table.
+Ans - Select * from Worker where FIRST_NAME in ('Rajat','Falgun');
+
+Q-14. Write an SQL query to print details of workers excluding first names, “Rajat” and “Falgun” from the Worker table.
+Ans - Select * from Worker where FIRST_NAME not in ('Rajat','Falgun');
+
+Q-15. Write an SQL query to print details of Workers with DEPARTMENT name as “Admin”.
+Ans - Select * from worker where Department Like 'admin';
+Note - (The LIKE operator is used in a WHERE clause to search for a specified pattern in a column. 
+There are two wildcards often used in conjunction with the LIKE operator: 
+The percent sign (%) represents zero, one, or multiple characters.)
+
+Q-16. Write an SQL query to print details of the Workers whose FIRST_NAME contains ‘a’.
+Ans - Select * from Worker where FIRST_NAME like '%a%';
+
+Q-17. Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘a’.
+Ans - Select * from Worker where FIRST_NAME like '%a';
+
+Q-18. Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘a’ and contains 8 alphabets.
+Ans - Select * from Worker where FIRST_NAME like '_____h';
+Note - here we want 8 alphabate so, give 7 underscore and then add alphabate
+
+Q-19. Write an SQL query to print details of the Workers whose SALARY lies between 100000 and 500000
+Ans - Select * from worker where salary between 100000 and 500000;
+
+Q-20. Write an SQL query to print details of the Workers who joined in Feb’2014.
+Ans - Select * from worker where year(Joining_Date) = 2014 and month Joining_Date=2;
+
+Q-21. Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+Ans - Select Count(*) from worker where Department = 'admin';
+
+Q-22. Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000
+Ans - Select concat (First_Name, ' ', Last_Name) As Worker_Name, salary From worker
+	where worker_id In (Select Worker_Id from worker where salary between 50000 and 100000);
+
+Q-23. Write an SQL query to fetch the no. of workers for each department in descending order.
+Ans - select Department, count(worker_id) as No_of_workers
+	from worker GroupByDepartment
+	OrderBy No_of_workers DESC;
+Q-24. Write an SQL query to print details of the Workers who are also Managers.
+Ans - SELECT DISTINCT W.FIRST_NAME, T.WORKER_TITLE FROM Worker W
+INNER JOIN Title T ON W.WORKER_ID = T.WORKER_REF_ID
+AND T.WORKER_TITLE in ('Manager');
+Note - Inner Join use for to collect comman data from both table and  data will show that match in both column
+
+Q-25. Write an SQL query to fetch duplicate records having matching data in some fields of a table.
+Ans - SELECT WORKER_TITLE, AFFECTED_FROM, COUNT(*) FROM Title
+GROUP BY WORKER_TITLE, AFFECTED_FROM HAVING COUNT(*) > 1;
+
+Q-26.  Write an SQL query to show only odd rows from a table.
+Ans - SELECT * FROM Worker WHERE MOD (WORKER_ID, 2) <> 0;
+Note- MOD (WORKER_ID, 2) <> 0: This is the condition in the WHERE clause. 
+"MOD" is a built-in SQL function that returns the remainder of the division of two numbers.
+ In this case, it calculates the remainder of dividing the "WORKER_ID" column by 2. 
+The condition <> 0 checks if the remainder is not equal to 0.
+
+
+Q-27. Write an SQL query to show only even rows from a table.
+Ans  -  SELECT * FROM Worker WHERE MOD (WORKER_ID, 2) = 0;
+
+Q-28. Write an SQL query to clone a new table from another table.
+Ans - CREATE TABLE WorkerClone LIKE Worker;
+
+Q-29. Write an SQL query to fetch intersecting records of two tables.
+Ans - 
+Note - The INTERSECT operator in SQL is used to retrieve the records that are identical/common between the result sets 
+of two SELECT (tables) statements.
+
+Q-30. Write an SQL query to show records from one table that another table does not have.
+Ans - SELECT * FROM Worker
+MINUS
+SELECT * FROM Title;
+Note - The Minus is an operator in Structured Query Language, which is used with two SELECT queries. 
+This operator returns only unique records of the first table, not the common records of both tables.
+
+
+
+	
